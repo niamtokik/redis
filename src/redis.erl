@@ -6,7 +6,7 @@
 -export([encode/1, decode/1]).
 -include_lib("eunit/include/eunit.hrl").
 
--type encode_error() :: {error, bitstring() | binary()}.
+%-type encode_error() :: {error, bitstring() | binary()}.
 -type encode_integer() :: integer().
 -type encode_string() :: bitstring() | binary().
 -type encode_bulk_string() :: {bulk_string, bitstring()}.
@@ -211,12 +211,12 @@ decode_integer(<<Char, Rest/bitstring>>, Buffer)
 %%--------------------------------------------------------------------
 %%
 %%--------------------------------------------------------------------
-decode_separator(Bitstring) ->
-    case binary:split(Bitstring, <<"\r\n">>) of
-        [<<>>] -> {ok, <<>>};
-        [<<>>,<<>>] -> {ok, <<>>};
-        [Value,Rest] -> {ok, Value, Rest}
-    end.
+%decode_separator(Bitstring) ->
+%    case binary:split(Bitstring, <<"\r\n">>) of
+%        [<<>>] -> {ok, <<>>};
+%        [<<>>,<<>>] -> {ok, <<>>};
+%        [Value,Rest] -> {ok, Value, Rest}
+%    end.
 
 %%--------------------------------------------------------------------
 %%
@@ -265,9 +265,9 @@ decode_error(Bitstring) ->
 
 decode_error(<<"\r\n">>, Buffer) ->
     {ok, {error, Buffer}};
-decode_error(<<"\r", Rest/bitstring>>, _) ->
+decode_error(<<"\r", _/bitstring>>, _) ->
     {error, badchar};
-decode_error(<<"\n", Rest/bitstring>>, _) ->
+decode_error(<<"\n", _/bitstring>>, _) ->
     {error, badchar};
 decode_error(<<Char, Rest/bitstring>>, Buffer) ->
     decode_error(Rest, <<Buffer/bitstring, Char>>).
