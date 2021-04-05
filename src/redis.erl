@@ -9,7 +9,7 @@
 %-type encode_error() :: {error, bitstring() | binary()}.
 -type encode_integer() :: integer().
 -type encode_string() :: bitstring() | binary().
--type encode_bulk_string() :: {bulk_string, bitstring()}.
+-type encode_bulk_string() :: {bulk_string, bitstring() | null} | list() | {error, binary()}.
 -type encode_array() :: [encode_integer() |
                          encode_string() |
                          encode_bulk_string()].
@@ -128,7 +128,7 @@ encode_valid_char(Bitstring)
       List :: list(),
       Buffer :: bitstring() | binary(),
       Counter :: integer(),
-      Return :: bitstring() | binary().
+      Return :: {ok, bitstring() | binary(), integer()}.
 encode_array([], Buffer, Counter) ->
     {ok, Buffer, Counter};
 encode_array([H|T], Buffer, Counter) ->
