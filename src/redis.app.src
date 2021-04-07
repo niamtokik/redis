@@ -1,0 +1,9 @@
+{application, redis,
+    [{description, "redis is an application and library implementing redis protocol in Erlang"},
+     {vsn, semver},
+     {registered, []},
+     {env, []},
+     {applications, [kernel, stdlib]},
+     {licenses, ["ISC License"]},
+     {links, [{"Github", "https://github.com/niamtokik/redis.git"}]}]
+}.
