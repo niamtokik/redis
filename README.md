@@ -3,6 +3,8 @@
 `redis` is an application and library implementing redis protocol in
 Erlang.
 
+[![Build Status][gh badge]][gh]
+
 ## Usage
 
 ```sh
@@ -72,3 +74,7 @@ rebar3 eunit
 
 Made with <3 by Mathieu Kerjouan with [Erlang](erlang.org/) and
 [rebar3](https://www.rebar3.org).
+
+<!-- Badges -->
+[gh]: https://github.com/niamtokik/redis/actions/workflows/main.yml
+[gh badge]: https://img.shields.io/github/workflow/status/niamtokik/redis/CI?style=flat-square
