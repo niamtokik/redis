@@ -5,20 +5,7 @@
 -module(redis).
 -export([encode/1, decode/1]).
 -include_lib("eunit/include/eunit.hrl").
-
-%-type encode_error() :: {error, bitstring() | binary()}.
--type encode_integer() :: integer().
--type encode_string() :: bitstring() | binary().
--type encode_bulk_string() :: {bulk_string, bitstring() | null} | list() | {error, binary()}.
--type encode_array() :: [encode_integer() |
-                         encode_string() |
-                         encode_bulk_string()].
--type encode_types() :: encode_integer() | 
-                        encode_string() |
-                        encode_bulk_string() |
-                        encode_array().
--type encode_return_ok() :: bitstring() | binary().
--type encode_return_error() :: {error, atom()}.
+-include("redis.hrl").
 
 %%-------------------------------------------------------------------
 %% @doc
@@ -178,7 +165,8 @@ decode_test() ->
     ].
 
 %%--------------------------------------------------------------------
-%%
+%% @doc
+%% @end
 %%--------------------------------------------------------------------
 decode_string(Bitstring) ->
     decode_string(Bitstring, <<>>).
@@ -195,7 +183,8 @@ decode_string(<<Char, Rest/bitstring>>, Buffer) ->
     decode_string(Rest, <<Buffer/bitstring, Char>>).
 
 %%--------------------------------------------------------------------
-%%
+%% @doc
+%% @end
 %%--------------------------------------------------------------------
 decode_integer(Integer) ->
     decode_integer(Integer, <<>>).
@@ -219,7 +208,8 @@ decode_integer(<<Char, Rest/bitstring>>, Buffer)
 %    end.
 
 %%--------------------------------------------------------------------
-%%
+%% @doc
+%% @end
 %%--------------------------------------------------------------------
 decode_bulk_string(<<"-1\r\n">>) ->
     {ok, nil};
@@ -235,7 +225,8 @@ decode_bulk_string(Bitstring) ->
     end.
              
 %%--------------------------------------------------------------------
-%%
+%% @doc
+%% @end
 %%--------------------------------------------------------------------
 decode_array(<<"0\r\n">>) ->
     {ok, []};
@@ -258,7 +249,8 @@ decode_array(Bitstring, Size, Buffer) ->
     end.
 
 %%--------------------------------------------------------------------
-%%
+%% @doc
+%% @end
 %%--------------------------------------------------------------------
 decode_error(Bitstring) ->
     decode_error(Bitstring, <<>>).
